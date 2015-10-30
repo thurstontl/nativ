@@ -8,7 +8,6 @@ function init() {
   c3 = '';
   $('.textbox').val('');
   $('#input').val('');
-  $('#btn-splash').hide();
 }
 
 function printResults() {
@@ -37,15 +36,8 @@ function printResults() {
 init();
 
 //show button on name submit
-function validate() {
-    if ( $('input[type:text').val().length > 0) ) {
-        $('#btn-splash').prop("disabled", false);
-    } else {
-        $('#btn-splash').prop("disabled", true);
-    }
-}
 
-validate();
+
 
 
 //click button to hide current and show next page
