@@ -2,12 +2,13 @@
 function init() {
   $('.full').hide();
   $('.splash').show();
-  $('.escape').hide();
+  $('.reset').hide();
   c1 = '';
   c2 = '';
   c3 = '';
   $('.textbox').val('');
   $('#input').val('');
+  $('#btn-splash').hide();
 }
 
 function printResults() {
@@ -36,31 +37,41 @@ function printResults() {
 init();
 
 //show button on name submit
-
+$('input').on('keyup',function() {
+  $('#btn-splash').show();
+  $('label').hide();
+  $('.instruction').hide();
+  $('.splash h2').hide();
+});
 
 
 
 //click button to hide current and show next page
 $('button').click(function() {
 
-  $('.escape').show();
+  $('.reset').show();
 
-  $('.escape').click(init);
+  $('.reset').click(init);
 
-  if( $(this).hasClass('reset') ) {
+  if( $(this).hasClass('again') ) {
     $(this).parent().hide();
     //show splash page
     $('.splash').fadeIn('fast');
-    $('input').show();
-    $('input').val('');
-    $('.message p').hide();
-  } 
+    $('.form').hide();
+    $('.message p').html("");
+    $('.message2 p').show();
+  }
 
-  if( $(this).hasClass('escape') ) {
+  if( $(this).hasClass('reset') ) {
     $('.splash').fadeIn('fast');
-    $('input').show();
     $('input').val('');
-    $('.message p').hide();
+    $('input').show();
+    $('.message p').html("");
+    $('.message2 p').html("");
+    $('.form label').show();
+    $('.form p').show();
+    $('.form').show();
+    $('.splash h2').show();
   } else {
     //hide current page
     $(this).parent().hide();
@@ -70,17 +81,15 @@ $('button').click(function() {
 
   $('#input').change(function() {
     txtinput = $(this).val();
-
-    $('.message p').text(txtinput);
   });
 });
 
 //question clicking functionality
 $('.question').click(function() {
 
-  $('.escape').show();
+  $('.reset').show();
 
-  $('.escape').click(init);
+  $('.reset').click(init);
   
   //hide current page
   $(this).parent().hide();
@@ -96,13 +105,18 @@ $('.textbox').change(function(){
   var textboxval =  $(this).val();
   
   if (textboxval.length <= 1) {
-    $('.message p').html("That's way too short. Type more, bro.");
+    $('.message p').html("Your name is only one letter?");
   } else {
-    $('.message p').html("Hey, " + textboxval + ". Great to have you here. :)");
+    $('.message p').html("Hey, " + textboxval + ". Nice to have you here. :)");
     $('input').hide();
+    $('.message2 p').html("Alright, let's do this again " + textboxval + ".");
+    $('.message2 p').hide();
   }
 
 });
+
+//duolingo fadein
+
 
 //quiz function
 var c1;
